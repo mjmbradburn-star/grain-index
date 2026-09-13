@@ -304,7 +304,7 @@
         navigator.clipboard.writeText(shareUrl).then(done, done);
       } else { done(); }
     });
-    document.title = esc(r.label) + ' - The Grain Index';
+    document.title = r.label + ' - The Grain Index';
     animateCounts();
     window.scrollTo(0, 0);
   }

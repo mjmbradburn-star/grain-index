@@ -16,11 +16,13 @@
   }
   function pct(part, whole) { return whole ? Math.round((part / whole) * 100) : 0; }
 
-  function bar(counts, total, cls) {
-    var t = total || (counts.u + counts.a + counts.x + counts.n);
+  function bar(counts, total, cls, includeN) {
+    if (includeN === undefined) includeN = true;
+    var t = total || (counts.u + counts.a + counts.x + (includeN ? counts.n : 0));
     return '<div class="' + (cls || 'bar') + '" role="img" aria-label="' +
       counts.u + ' unchanged, ' + counts.a + ' augmented, ' + counts.x + ' automated, ' + counts.n + ' new">' +
       ['u', 'a', 'x', 'n'].map(function (k) {
+        if (k === 'n' && !includeN) return '';
         var w = (counts[k] / t) * 100;
         return w > 0 ? '<i class="' + k + '" style="width:' + w.toFixed(2) + '%"></i>' : '';
       }).join('') + '</div>';
@@ -72,7 +74,7 @@
       var base = r.counts.u + r.counts.a + r.counts.x;
       return '<div class="shift-row">' +
         '<a class="role-name" href="#/role/' + r.slug + '">' + esc(r.label) + '</a>' +
-        bar(r.counts) +
+        bar(r.counts, null, 'bar', false) +
         '<span class="shift-pct">' + pct(r.counts.x, base) + '% auto</span>' +
         '</div>';
     }).join('');
@@ -121,13 +123,16 @@
       return '<a class="role-card" href="#/role/' + r.slug + '">' +
         '<span class="rc-cluster">' + CLUSTER_NAMES[r.cluster] + '</span>' +
         '<h3>' + esc(r.label) + '</h3>' +
-        bar(r.counts) +
+        bar(r.counts, null, 'bar', false) +
         '<span class="rc-counts"><b>' + r.counts.u + '</b> unchanged · <b>' + r.counts.a + '</b> augmented · <b>' + r.counts.x + '</b> automated · <b>' + r.counts.n + '</b> new</span>' +
         '</a>';
     }
     function applyFilter() {
       var q = state.q.toLowerCase();
-      var hits = DATA.roles.filter(function (r) {
+      var order = { people: 0, knowledge: 1 };
+      var hits = DATA.roles.slice().sort(function (a, b) {
+        return (order[a.cluster] - order[b.cluster]) || a.label.localeCompare(b.label);
+      }).filter(function (r) {
         if (state.cluster !== 'all' && r.cluster !== state.cluster) return false;
         return !q || r.label.toLowerCase().indexOf(q) !== -1 || r.onetTitle.toLowerCase().indexOf(q) !== -1;
       });

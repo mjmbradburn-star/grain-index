@@ -229,3 +229,11 @@ h2.section-title {
   .role-card, .btn { transition: none; }
   .role-card:hover { transform: none; }
 }
+.role-bar i.u { background: var(--b-human); }
+.role-bar i.a { background: var(--b-aug); }
+.role-bar i.x { background: var(--b-auto); }
+.role-bar i.n { background: var(--b-new); }
+.role-bar { margin-top: 1.5rem; border-radius: 2px; overflow: hidden; }
+.hero .legend span { color: oklch(76% 0.02 85); }
+.shift-pct { white-space: nowrap; }
+@media (min-width: 46rem) { .shift-row { grid-template-columns: 16rem 1fr 5.5rem; } }

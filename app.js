@@ -11,6 +11,32 @@
   };
   var CLUSTER_NAMES = { people: 'People and HR', knowledge: 'Wider knowledge work' };
 
+  var ALIASES = {
+    'hr-specialists': ['recruiter', 'recruitment', 'talent acquisition', 'hr advisor', 'hr generalist'],
+    'hr-business-partner': ['hrbp'],
+    'hr-managers': ['head of hr', 'hr director'],
+    'hr-assistants': ['hr admin', 'hr coordinator'],
+    'training-development-managers': ['l&d', 'learning and development'],
+    'training-development-specialists': ['l&d', 'learning', 'trainer'],
+    'comp-benefits-analysts': ['reward'],
+    'compensation-benefits-managers': ['reward', 'head of reward'],
+    'labor-relations-specialists': ['union', 'industrial relations', 'employee relations'],
+    'software-developers': ['engineer', 'engineering', 'programmer'],
+    'customer-service-reps': ['support', 'helpdesk', 'call centre'],
+    'executive-assistants': ['pa', 'ea', 'personal assistant'],
+    'project-managers': ['pm'],
+    'data-scientists': ['machine learning', 'ml'],
+    'management-analysts': ['consultant'],
+    'market-research-analysts': ['insight'],
+    'accountants-auditors': ['accountant', 'auditor', 'finance'],
+    'financial-analysts': ['fp&a'],
+    'lawyers': ['legal', 'counsel'],
+    'paralegals': ['legal'],
+    'marketing-managers': ['brand'],
+    'operations-managers': ['ops'],
+    'technical-writers': ['documentation']
+  };
+
   function esc(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
@@ -134,7 +160,9 @@
         return (order[a.cluster] - order[b.cluster]) || a.label.localeCompare(b.label);
       }).filter(function (r) {
         if (state.cluster !== 'all' && r.cluster !== state.cluster) return false;
-        return !q || r.label.toLowerCase().indexOf(q) !== -1 || r.onetTitle.toLowerCase().indexOf(q) !== -1;
+        if (!q) return true;
+        var hay = (r.label + ' ' + r.onetTitle + ' ' + (ALIASES[r.slug] || []).join(' ')).toLowerCase();
+        return hay.indexOf(q) !== -1;
       });
       grid.innerHTML = hits.map(card).join('');
       noRes.hidden = hits.length > 0;

@@ -82,7 +82,7 @@
     app.innerHTML =
       '<section class="hero"><div class="wrap">' +
       '<p class="eyebrow">The Grain Index</p>' +
-      '<h1>Every job is a bundle of tasks. AI is re-dealing the bundle.</h1>' +
+      '<h1>Every job is a bundle of tasks. AI re-deals the bundle.</h1>' +
       '<p class="lede"><strong>' + s.tasks + ' real tasks across ' + s.roles + ' roles</strong>, each one called: stays with the person, augmented, automated, or created by AI itself. Built on O*NET, the US Department of Labor\'s task database. The classifications are ours, stated plainly, with the close calls flagged.</p>' +
       legend() +
       '</div></section>' +

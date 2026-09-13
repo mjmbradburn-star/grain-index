@@ -169,10 +169,17 @@
     var onetSoc = r.soc.indexOf('+') === -1 ? r.soc : null;
     var onetUrl = onetSoc ? 'https://www.onetonline.org/link/summary/' + onetSoc : null;
 
-    function bucketSection(num, key, title, lede, tasks) {
+    var sectionNumbers = {};
+    var nextSection = 2;
+    ['u', 'a', 'x', 'n'].forEach(function (key) {
+      var count = key === 'n' ? r.new.length : r.tasks.filter(function (t) { return t.b === key; }).length;
+      if (count) sectionNumbers[key] = nextSection++;
+    });
+
+    function bucketSection(key, title, lede, tasks) {
       if (!tasks.length) return '';
       return '<section class="block sweep"><div class="wrap">' +
-        '<p class="kicker">' + num + ' ' + title + '</p>' +
+        '<p class="kicker">' + sectionNumbers[key] + '.0 ' + title + '</p>' +
         '<h2 class="section-title">' + tasks.length + ' task' + (tasks.length === 1 ? '' : 's') + '</h2>' +
         '<p class="section-lede">' + lede + '</p>' +
         '<div class="task-list">' + tasks.map(function (t) { return taskCard(t, key); }).join('') + '</div>' +
@@ -183,7 +190,7 @@
     var closeCalls = r.tasks.filter(function (t) { return t.bl; });
     var closeHtml = closeCalls.length ?
       '<section class="block sweep"><div class="wrap">' +
-      '<p class="kicker">6.0 Close calls</p>' +
+      '<p class="kicker">' + nextSection + '.0 Close calls</p>' +
       '<h2 class="section-title">Argue with these.</h2>' +
       '<p class="section-lede">These tasks genuinely sit between buckets. We made the call and wrote the reason, but a good operator could land the other way. That is the point of showing them.</p>' +
       '<div class="task-list">' + closeCalls.map(function (t) { return taskCard(t, t.b); }).join('') + '</div>' +
@@ -211,10 +218,10 @@
       '<blockquote class="take">' + esc(r.take) + '</blockquote>' +
       '<p style="margin-top:1.5rem"><button class="copy-link" id="copyLink">Copy link to this role</button></p>' +
       '</div></section>' +
-      bucketSection('2.0', 'u', 'Stays with the person', 'Presence, trust, legal accountability or physical work. AI can brief and draft around these tasks, but a person does them.', r.tasks.filter(function (t) { return t.b === 'u'; })) +
-      bucketSection('3.0', 'a', 'Augmented', 'The judgement and the accountability stay human. AI does the first draft, the analysis, the shortlist. The person reviews and decides.', r.tasks.filter(function (t) { return t.b === 'a'; })) +
-      bucketSection('4.0', 'x', 'Automated', 'High volume, rule based, digital in and out. AI can run these end to end; people handle the exceptions and check the quality.', r.tasks.filter(function (t) { return t.b === 'x'; })) +
-      bucketSection('5.0', 'n', 'New tasks created by AI', 'None of these has an O*NET row yet. They exist because the tool now exists, and its output needs checking, tuning and defending.', r.new.map(function (t) { return { text: t.t, r: t.r }; })) +
+      bucketSection('u', 'Stays with the person', 'Presence, trust, legal accountability or physical work. AI can brief and draft around these tasks, but a person does them.', r.tasks.filter(function (t) { return t.b === 'u'; })) +
+      bucketSection('a', 'Augmented', 'The judgement and the accountability stay human. AI does the first draft, the analysis, the shortlist. The person reviews and decides.', r.tasks.filter(function (t) { return t.b === 'a'; })) +
+      bucketSection('x', 'Automated', 'High volume, rule based, digital in and out. AI can run these end to end; people handle the exceptions and check the quality.', r.tasks.filter(function (t) { return t.b === 'x'; })) +
+      bucketSection('n', 'New tasks created by AI', 'None of these has an O*NET row yet. They exist because the tool now exists, and its output needs checking, tuning and defending.', r.new.map(function (t) { return { text: t.t, r: t.r }; })) +
       closeHtml +
       methodBlock() +
       ctaBlock();

@@ -274,3 +274,12 @@ h2.section-title {
   .skills-grid { grid-template-columns: 1fr 1fr; }
   .seg-grid { grid-template-columns: 1fr 1fr; }
 }
+
+@media (max-width: 34rem) {
+  .site-header { align-items: center; flex-wrap: wrap; gap: 0.35rem 0.75rem; }
+  .header-tag { order: 2; width: 100%; }
+  .site-nav { gap: 0.8rem; }
+  .chips { flex-wrap: wrap; }
+  .big-num { padding: 1rem 0.75rem; }
+  .big-num .l { line-height: 1.3; }
+}

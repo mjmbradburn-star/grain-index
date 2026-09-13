@@ -167,6 +167,11 @@
 
   G.roles.push.apply(G.roles, newRoles);
 
+  /* This is a People-function index. The wider v1 knowledge-work set was useful
+     while testing the method, but it blurred the audience and the point. Keep
+     only roles a Head of People would use to design or benchmark the function. */
+  G.roles = G.roles.filter(function (r) { return r.cluster === "people"; });
+
   var moreRoles = [
     {
       "slug": "talent-acquisition-partner",

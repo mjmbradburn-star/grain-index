@@ -48,7 +48,17 @@
     'paralegals': ['legal'],
     'marketing-managers': ['brand'],
     'operations-managers': ['ops'],
-    'technical-writers': ['documentation']
+    'technical-writers': ['documentation'],
+    'people-partner': ['people business partner', 'strategic people partner', 'hrbp'],
+    'head-of-people': ['people director', 'director of people', 'vp people', 'head of hr'],
+    'people-ops-manager': ['people operations', 'people ops', 'hr operations'],
+    'people-ops-generalist': ['people generalist', 'hr generalist', 'first people hire'],
+    'talent-acquisition-partner': ['recruiter', 'recruitment', 'talent partner', 'talent acquisition', 'sourcer'],
+    'people-analytics-lead': ['people analyst', 'workforce analytics', 'hr analytics'],
+    'people-systems-analyst': ['hris', 'workday', 'people technology', 'people tech'],
+    'employee-relations-partner': ['employee relations', 'er partner', 'industrial relations'],
+    'chief-people-officer': ['cpo', 'chief human resources officer', 'chro', 'people executive'],
+    'ai-enablement-lead': ['ai adoption', 'ai transformation', 'ai training', 'enablement']
   };
 
   function esc(s) {
@@ -137,19 +147,17 @@
       '<section class="block"><div class="wrap">' +
       '<p class="kicker">The shape of the shift</p>' +
       '<h2 class="section-title">Most jobs bend. Few break.</h2>' +
-      '<p class="section-lede">Sorted by share of today\'s tasks that are candidates for full automation. Even at the top of the list, the story is transformation, not deletion. The green is what stays human. The brass is where the hours come back.</p>' +
+      '<p class="section-lede">Sorted by share of today\'s tasks that are candidates for full automation. Across the People function, the story is transformation, not deletion. The green is what stays human. The brass is where the hours come back.</p>' +
       rows +
       '</div></section>' +
       '<section class="block sweep" id="roles"><div class="wrap">' +
       '<p class="kicker">Pick a role</p>' +
       '<h2 class="section-title">Every role, every task, every call.</h2>' +
-      '<p class="section-lede">Open any role for the full task bundle: the O*NET wording, the bucket, the reason, and what to do about it. People and HR roles first, then the wider knowledge work your organisation runs on.</p>' +
+      '<p class="section-lede">Open any role for the full task bundle: the O*NET wording, the bucket, the reason, and what to do about it. Twenty roles across the modern People function, from operations and recruiting to systems, analytics and the C-suite.</p>' +
       '<div class="picker-controls">' +
-      '<input class="search" type="search" placeholder="Search roles, for example recruiter, lawyer, nurse" aria-label="Search roles">' +
+      '<input class="search" type="search" placeholder="Search roles, for example recruiter, HRIS, reward" aria-label="Search roles">' +
       '<div class="chips" role="group" aria-label="Filter by cluster">' +
-      '<button class="chip-btn" data-cluster="all" aria-pressed="true">All roles</button>' +
-      '<button class="chip-btn" data-cluster="people" aria-pressed="false">People and HR</button>' +
-      '<button class="chip-btn" data-cluster="knowledge" aria-pressed="false">Knowledge work</button>' +
+      '<button class="chip-btn" data-cluster="all" aria-pressed="true">All People roles</button>' +
       '</div></div>' +
       '<div class="role-grid" id="roleGrid"></div>' +
       '<p class="no-results" id="noResults" hidden>No roles match that search. Try a shorter word.</p>' +
@@ -369,9 +377,9 @@
       '<section class="block sweep"><div class="wrap">' +
       '<p class="kicker">3.0 Where O*NET fails</p>' +
       '<h2 class="section-title">A map of a country that has moved.</h2>' +
-      '<p class="method-p">The academic critique is older than the AI wave. Handel\'s review in the Journal for Labour Market Research found O*NET\'s coverage of information technology and new workplace structures sparse, and its tools-and-technology module unable to say how many workers use a technology or how deeply. The taxonomy measures the past carefully.</p>' +
-      '<p class="method-p">The AI era makes it worse. A 2026 Hugging Face analysis of labour taxonomies puts it plainly: the frameworks were designed before work became digital-first, they assume human-centric performance, and they have no category for hybrid human-AI workflows at all. We are measuring the future of work with tools built for the past.</p>' +
-      '<p class="method-p">For the People function specifically, the failure is concrete. There is no People Partner. No People Operations. No HRIS or People Systems occupation, though the function now runs on those systems. No People Analytics. No AI Enablement anything. The occupations that exist, HR Specialist and HR Manager, describe the established-company versions of jobs that startups have rewritten. And the whole thing is US-shaped and stage-blind: it cannot tell a seed-stage generalist from a PE-scale specialist, because to O*NET they are the same occupation.</p>' +
+      '<p class="method-p">The academic critique is older than the AI wave. Handel\'s review in the Journal for Labour Market Research found O*NET\'s coverage of information technology and new workplace structures sparse, and its tools-and-technology module unable to say how many workers use a technology or how deeply. The taxonomy describes established occupations carefully, but it does not map neatly onto newer People-function roles.</p>' +
+      '<p class="method-p">The AI era makes it worse. A 2026 Hugging Face analysis of labour taxonomies puts it plainly: the frameworks were designed before work became digital-first, they assume human-centric performance, and they have no category for hybrid human-AI workflows at all. Existing taxonomies do not represent hybrid human-AI workflows cleanly.</p>' +
+      '<p class="method-p">For the People function specifically, the gap is concrete. There is no People Partner. No People Operations. No HRIS or People Systems occupation, though the function now runs on those systems. No People Analytics. No AI Enablement anything. The occupations that exist, HR Specialist and HR Manager, describe the established-company versions of jobs that startups have rewritten. And the whole thing is US-shaped and stage-blind: it cannot tell a seed-stage generalist from a PE-scale specialist, because to O*NET they are the same occupation.</p>' +
       '</div></section>' +
 
       '<section class="block"><div class="wrap">' +

@@ -10,6 +10,22 @@
     });
     DATA.stats = st;
   })();
+  var DEFAULT_SHARE = {
+    title: 'The Grain Index',
+    description: 'Every job is a bundle of tasks. AI re-deals the bundle. 20 People roles, 299 tasks, each one called.'
+  };
+  function setShare(title, description) {
+    var pairs = [
+      ['meta[property="og:title"]', title],
+      ['meta[property="og:description"]', description],
+      ['meta[name="twitter:title"]', title],
+      ['meta[name="twitter:description"]', description]
+    ];
+    pairs.forEach(function (pair) {
+      var el = document.querySelector(pair[0]);
+      if (el) el.setAttribute('content', pair[1]);
+    });
+  }
   var SRC_LABELS = {
     'onet': 'Grounded in O*NET task data',
     'onet+ads': 'Hybrid: O*NET core plus advertised roles',
@@ -305,6 +321,7 @@
       } else { done(); }
     });
     document.title = r.label + ' - The Grain Index';
+    setShare(r.label + ' - The Grain Index', r.label + ': ' + base + ' real tasks, each one called. ' + c.u + ' stay with the person, ' + c.a + ' augmented, ' + c.x + ' automated, plus ' + c.n + ' new tasks created.');
     animateCounts();
     window.scrollTo(0, 0);
   }
@@ -341,6 +358,7 @@
       methodBlock() +
       ctaBlock();
     document.title = 'The scale lens - The Grain Index';
+    setShare('The scale lens - The Grain Index', 'How the People function\'s task bundle shifts from seed to PE scale, and what each stage means for AI exposure.');
     window.scrollTo(0, 0);
   }
 
@@ -418,6 +436,7 @@
       '</div></section>' +
       ctaBlock();
     document.title = 'The method - The Grain Index';
+    setShare('The method - The Grain Index', 'Every choice in this index, stated in the open: where the tasks come from, how the market layer works, and what we still cannot tell you.');
     window.scrollTo(0, 0);
   }
 
@@ -444,7 +463,7 @@
     if (m) { renderRole(m[1]); }
     else if (h.indexOf('#/scale') === 0) { renderScale(); }
     else if (h.indexOf('#/method') === 0) { renderMethod(); }
-    else { document.title = 'The Grain Index - AI and the task bundle, role by role'; renderHome(); }
+    else { document.title = 'The Grain Index - AI and the task bundle, role by role'; setShare(DEFAULT_SHARE.title, DEFAULT_SHARE.description); renderHome(); }
   }
   window.addEventListener('hashchange', route);
   route();
